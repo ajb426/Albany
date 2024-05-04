@@ -1,0 +1,12 @@
+myData<-read.csv("C:/Users/baronea/Dropbox/Albany/Intro to Data Analytics/NCAAstats-2.csv", header=TRUE)
+View(myData)
+myData$win<-gsub("-.*", "", myData$W.L)
+myData$loss<-gsub(".*-", "", myData$W.L)
+typeof(myData$win)
+myData$win<-as.numeric(myData$win)
+myData$loss<-as.numeric(myData$loss)
+myData$wlRatio<-myData$win/myData$loss
+myData$moreWin<-ifelse(myData$wlRatio<=1,"No","Yes")
+winset<-subset(myData,moreWin=="Yes")
+lesswinset<-subset(myData, moreWin=="No")
+t.test(winset$YPG, lesswinset$YPG)

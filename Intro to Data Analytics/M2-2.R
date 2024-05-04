@@ -1,0 +1,5 @@
+myData<-read.table("C:/Users/baronea/Downloads/tablet-computers-2014.txt",header=TRUE,sep="\t")
+View(myData)
+myData$brand<-gsub("\\s.*","",myData$Model)
+x<-list(myData$brand)
+aggregate(myData$Battery.life..hrs., by=x, FUN="mean", na.rm = TRUE)
